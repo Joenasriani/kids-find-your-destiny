@@ -17,37 +17,40 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            height: 100vh;
+            height: 100dvh;
             width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .bubble-btn {
             transition: transform 0.1s ease, box-shadow 0.1s ease;
-            box-shadow: 0 0.4rem 0 rgba(0,0,0,0.3);
+            box-shadow: 0 0.4rem 0 rgba(0,0,0,0.4);
         }
 
         .bubble-btn:active {
             transform: translateY(0.2rem);
-            box-shadow: 0 0.2rem 0 rgba(0,0,0,0.3);
+            box-shadow: 0 0.2rem 0 rgba(0,0,0,0.4);
         }
 
         .crystal-ball-glow {
-            filter: drop-shadow(0 0 15px #a78bfa);
-            animation: pulse-glow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 25px #a78bfa);
+            animation: pulse-glow 2.5s ease-in-out infinite alternate;
         }
 
         @keyframes pulse-glow {
-            from { filter: drop-shadow(0 0 10px #a78bfa); transform: scale(1); }
-            to { filter: drop-shadow(0 0 30px #c084fc); transform: scale(1.05); }
+            from { filter: drop-shadow(0 0 15px #a78bfa); transform: scale(1); }
+            to { filter: drop-shadow(0 0 50px #c084fc); transform: scale(1.1); }
         }
 
         .float {
-            animation: floating 3s ease-in-out infinite;
+            animation: floating 3.5s ease-in-out infinite;
         }
 
         @keyframes floating {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-0.8rem); }
+            50% { transform: translateY(-1rem); }
         }
 
         .victory-bounce {
@@ -62,10 +65,10 @@
         .rainbow-text {
             animation: rainbow 3s linear infinite;
             text-shadow: 
-                -2px -2px 0 #000,  
-                 2px -2px 0 #000,
-                -2px  2px 0 #000,
-                 2px  2px 0 #000;
+                -3px -3px 0 #000,  
+                 3px -3px 0 #000,
+                -3px  3px 0 #000, 
+                 3px  3px 0 #000;
         }
 
         @keyframes rainbow {
@@ -77,11 +80,12 @@
         .title-wave span {
             display: inline-block;
             animation: wave 1.5s infinite;
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
         }
 
         @keyframes wave {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-0.2rem); color: #fef08a; }
+            50% { transform: translateY(-0.5rem); color: #fef08a; }
         }
 
         .sparkle {
@@ -89,87 +93,132 @@
             pointer-events: none;
             background: white;
             border-radius: 50%;
-            animation: blink 2s infinite;
+            animation: blink 2.5s infinite;
         }
 
         @keyframes blink {
             0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
-        /* Landscape/Small Screen Fixes: No Scrolling Allowed */
-        @media (max-height: 550px) {
-            .game-title { font-size: 6.5vh !important; line-height: 0.8 !important; margin-bottom: 1vh !important; }
-            .char-box { height: 12vh !important; margin-bottom: 1vh !important; }
-            .crystal-ball { font-size: 15vh !important; }
-            .sub-text { font-size: 3vh !important; margin-bottom: 2vh !important; }
-            .main-btn { padding: 1.5vh 6vh !important; font-size: 4vh !important; }
-            .quiz-btn { padding: 2vh !important; font-size: 5vh !important; }
-            .question-box { font-size: 5.5vh !important; min-height: 8vh !important; margin-bottom: 2vh !important; }
-            .dots-wrap { margin-bottom: 2vh !important; }
-            .verdict-header { font-size: 4vh !important; }
-            .verdict-emoji { font-size: 18vh !important; margin-bottom: 1vh !important; }
-            .verdict-name-text { font-size: 7vh !important; margin-bottom: 1vh !important; }
-            .verdict-msg-text { font-size: 4vh !important; margin-bottom: 3vh !important; }
-            #main-card { padding: 3vh 4vh !important; border-width: 1vh !important; }
+        .fs-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.4);
+        }
+
+        /* Landscape Specific Adjustments */
+        @media (orientation: landscape) and (max-height: 600px) {
+            .main-card-ui { 
+                max-width: 90vw !important; 
+                max-height: 95dvh !important; 
+                padding: 2vh 4vw !important;
+                gap: 2vh !important;
+            }
+            .result-container {
+                flex-direction: row !important;
+                justify-content: space-evenly !important;
+                align-items: center !important;
+                width: 100% !important;
+                gap: 2vw !important;
+            }
+            .verdict-text-group {
+                text-align: left !important;
+                max-width: 50% !important;
+                align-items: flex-start !important;
+            }
+            .verdict-emoji {
+                font-size: 25vh !important;
+                margin: 0 !important;
+            }
+            .game-title { font-size: 8vh !important; line-height: 0.8 !important; }
+            .char-box { height: 20vh !important; margin: 0 !important; }
+            .crystal-ball { font-size: 20vh !important; }
+            .sub-text { font-size: 4vh !important; margin: 0 !important; }
+            .main-btn { font-size: 5vh !important; padding: 2vh 8vw !important; }
+            .quiz-btn { font-size: 6vh !important; padding: 2vh !important; }
+            .question-box { font-size: 6vh !important; min-height: 10vh !important; }
+            .verdict-header { font-size: 5vh !important; }
+            .verdict-name-text { font-size: 7vh !important; text-align: left !important; }
+            .verdict-msg-text { font-size: 4vh !important; text-align: left !important; }
+            .reset-btn { font-size: 5vh !important; padding: 2vh 6vw !important; }
+        }
+
+        @media (min-width: 2000px) {
+            html { font-size: 30px; }
+            .main-card-ui { max-width: 70rem; }
         }
     </style>
 </head>
-<body class="flex items-center justify-center bg-indigo-950">
+<body class="bg-indigo-950">
 
     <div id="star-field" class="absolute inset-0 overflow-hidden"></div>
 
-    <div id="main-card" class="bg-indigo-900 rounded-[8vmin] p-[5vmin] shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border-[1.5vmin] border-yellow-400/30 relative overflow-hidden transition-all duration-500 max-h-[98vh] flex flex-col items-center justify-center m-2">
+    <button id="fullscreen-toggle" onclick="toggleFullScreen()" class="fs-btn fixed top-4 right-4 z-50 text-white rounded-full w-12 h-12 flex flex-col items-center justify-center transition-all cursor-pointer hover:scale-110 active:scale-95 text-[9px] leading-tight text-center uppercase tracking-widest font-bold">
+        <span class="text-lg">⛶</span>
+        <span id="fs-text">Full</span>
+    </button>
+
+    <div id="main-card" class="main-card-ui bg-indigo-900 rounded-[8vmin] p-[8vmin] shadow-[0_0_80px_rgba(0,0,0,0.7)] w-[95vw] max-w-2xl border-[1.5vmin] border-yellow-400/30 relative overflow-hidden transition-all duration-500 max-h-[96dvh] flex flex-col items-center justify-between gap-y-4">
         
         <!-- Intro Screen -->
-        <div id="intro-screen" class="text-center w-full flex flex-col items-center justify-center">
-            <h1 class="game-title title-wave text-[9vmin] text-yellow-400 mb-[3vmin] uppercase leading-[0.85] tracking-tighter">
+        <div id="intro-screen" class="text-center w-full h-full flex flex-col items-center justify-between py-2 space-y-2">
+            <h1 class="game-title title-wave text-[10vmin] text-yellow-400 uppercase leading-[0.85] tracking-tighter shrink-0">
                 <div class="block"><span>F</span><span>I</span><span>N</span><span>D</span></div>
                 <div class="block"><span>Y</span><span>O</span><span>U</span><span>R</span></div>
                 <div class="block"><span>D</span><span>E</span><span>S</span><span>T</span><span>I</span><span>N</span><span>Y</span></div>
             </h1>
             
-            <div class="char-box flex justify-center items-center mb-[4vmin] h-[16vmin] relative">
-                <div class="crystal-ball text-[18vmin] crystal-ball-glow">🔮</div>
-                <div class="absolute text-[8vmin] -top-2 -left-8 float" style="animation-delay: 0.2s">✨</div>
-                <div class="absolute text-[8vmin] -bottom-2 -right-8 float" style="animation-delay: 0.5s">🌙</div>
+            <div class="char-box flex justify-center items-center h-[22vmin] relative shrink-0">
+                <div class="crystal-ball text-[24vmin] crystal-ball-glow">🔮</div>
+                <div class="absolute text-[10vmin] -top-6 -left-12 float" style="animation-delay: 0.2s">✨</div>
+                <div class="absolute text-[10vmin] -bottom-6 -right-12 float" style="animation-delay: 0.5s">🌙</div>
             </div>
 
-            <p class="sub-text text-yellow-200 text-[4vmin] mb-[4vmin] italic opacity-80">The Magic Orbs Await...</p>
-
-            <button onclick="startGame()" class="main-btn bubble-btn bg-purple-500 hover:bg-purple-400 text-white text-[5.5vmin] py-[2.5vmin] px-[10vmin] rounded-full border-b-[1vmin] border-purple-800 animate-pulse w-full sm:w-auto">
-                REVEAL! 🪄
-            </button>
+            <div class="w-full flex flex-col items-center gap-y-4 shrink-0">
+                <p class="sub-text text-yellow-200 text-[5vmin] italic opacity-85">The Magic Orbs Await</p>
+                <button onclick="startGame()" class="main-btn bubble-btn bg-purple-500 hover:bg-purple-400 text-white text-[7vmin] py-[4vmin] px-[14vmin] rounded-full border-b-[1.5vmin] border-purple-800 animate-pulse w-full sm:w-auto">
+                    REVEAL! 🪄
+                </button>
+            </div>
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden flex flex-col items-center w-full justify-center">
-            <div id="dots-container" class="dots-wrap flex justify-center gap-[2vmin] mb-[4vmin]"></div>
-            <h2 id="question-text" class="question-box text-[6vmin] text-yellow-100 mb-[5vmin] min-h-[12vh] flex items-center justify-center italic px-[2vmin] text-center leading-tight">
+        <div id="quiz-screen" class="hidden h-full flex flex-col items-center w-full justify-between py-4 space-y-4">
+            <div id="dots-container" class="dots-wrap flex justify-center gap-4 shrink-0"></div>
+            
+            <h2 id="question-text" class="question-box text-[7vmin] text-yellow-100 min-h-[15vh] flex items-center justify-center italic px-4 text-center leading-tight flex-grow">
                 Ready?
             </h2>
-            <div class="flex flex-col gap-[2.5vmin] w-full max-w-md">
-                <button onclick="handleAnswer(true)" class="quiz-btn bubble-btn bg-emerald-500 hover:bg-emerald-400 text-white text-[7.5vmin] py-[3.5vmin] rounded-[5vmin] border-b-[1vmin] border-emerald-800 w-full">
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md shrink-0">
+                <button onclick="handleAnswer(true)" class="quiz-btn bubble-btn bg-emerald-500 hover:bg-emerald-400 text-white text-[9vmin] py-6 sm:py-4 rounded-[7vmin] border-b-[1.5vmin] border-emerald-800 w-full">
                     YES! 🌟
                 </button>
-                <button onclick="handleAnswer(false)" class="quiz-btn bubble-btn bg-rose-500 hover:bg-rose-400 text-white text-[7.5vmin] py-[3.5vmin] rounded-[5vmin] border-b-[1vmin] border-rose-800 w-full">
+                <button onclick="handleAnswer(false)" class="quiz-btn bubble-btn bg-rose-500 hover:bg-rose-400 text-white text-[9vmin] py-6 sm:py-4 rounded-[7vmin] border-b-[1.5vmin] border-rose-800 w-full">
                     NO ☁️
                 </button>
             </div>
         </div>
 
         <!-- Result Screen -->
-        <div id="result-screen" class="hidden text-center flex flex-col items-center w-full justify-center">
-            <h3 class="verdict-header text-[8vmin] text-yellow-300 mb-[1vmin] animate-bounce tracking-wide">YAY! 🎉</h3>
-            <h2 class="text-[5.5vmin] text-purple-200 mb-[2vmin] uppercase tracking-wider">Your destiny is...</h2>
+        <div id="result-screen" class="hidden h-full text-center flex flex-col items-center w-full justify-between py-4 space-y-4">
+            <div class="shrink-0 space-y-1">
+                <h3 class="verdict-header text-[8vmin] text-yellow-300 animate-bounce tracking-wide">YAY!</h3>
+                <h2 class="text-[5vmin] text-purple-200 uppercase tracking-wider">Your destiny is</h2>
+            </div>
             
-            <div id="verdict-emoji" class="verdict-emoji text-[20vmin] mb-[2vmin] float drop-shadow-2xl">🏆</div>
+            <div class="result-container flex flex-col items-center justify-center w-full space-y-4 flex-grow">
+                <div id="verdict-emoji" class="verdict-emoji text-[25vmin] float drop-shadow-2xl shrink-0">🏆</div>
+                
+                <div class="verdict-text-group w-full flex flex-col items-center gap-y-2 shrink-0">
+                    <p id="verdict-name" class="verdict-name-text text-[10vmin] rainbow-text font-black leading-tight uppercase tracking-widest px-2"></p>
+                    <p id="verdict-msg" class="verdict-msg-text text-white text-[5.5vmin] font-bold leading-snug px-4 drop-shadow-lg tracking-wide"></p>
+                </div>
+            </div>
             
-            <p id="verdict-name" class="verdict-name-text text-[11vmin] rainbow-text mb-[2vmin] font-black leading-tight uppercase tracking-widest px-[2vmin]"></p>
-            
-            <p id="verdict-msg" class="verdict-msg-text text-white text-[5.5vmin] mb-[5vmin] font-bold leading-snug px-[4vmin] drop-shadow-lg tracking-wide"></p>
-            
-            <button onclick="resetGame()" class="bubble-btn bg-indigo-500 hover:bg-indigo-400 text-white text-[5.5vmin] py-[3vmin] px-[10vmin] rounded-full border-b-[1.2vmin] border-indigo-800 w-full sm:w-auto">
+            <button onclick="resetGame()" class="reset-btn bubble-btn bg-indigo-500 hover:bg-indigo-400 text-white text-[6vmin] py-[3.5vmin] px-[16vmin] rounded-full border-b-[1.5vmin] border-indigo-800 w-full sm:w-auto shrink-0">
                 Seek Again 🔄
             </button>
         </div>
@@ -177,7 +226,6 @@
     </div>
 
     <script>
-        // THE DATA BANK - All elements stored here for deterministic play
         const gameData = {
             questions: [
                 "Do you see magic in the stars tonight?",
@@ -221,10 +269,10 @@
 
         function createStarField() {
             const field = document.getElementById('star-field');
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 40; i++) {
                 const star = document.createElement('div');
                 star.className = 'sparkle';
-                const size = Math.random() * 3 + 2;
+                const size = Math.random() * 4 + 3;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.top = Math.random() * 100 + '%';
@@ -234,15 +282,33 @@
             }
         }
 
+        function toggleFullScreen() {
+            const text = document.getElementById('fs-text');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    text.innerText = "Exit";
+                }).catch(err => {
+                    console.log("Fullscreen error");
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().then(() => {
+                        text.innerText = "Full";
+                    });
+                }
+            }
+        }
+
         function startGame() {
             document.getElementById('intro-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').classList.add('flex');
             sessionQuestions = [...gameData.questions].sort(() => Math.random() - 0.5).slice(0, 5);
             const container = document.getElementById('dots-container');
-            container.innerHTML = '';
+            container.innerHTML = "";
             for (let i = 0; i < 5; i++) {
                 const dot = document.createElement('div');
-                dot.className = "w-[3vmin] h-[3vmin] rounded-full bg-indigo-800 border-[0.4vmin] border-indigo-700 transition-all duration-300";
+                dot.className = "w-[4vmin] h-[4vmin] rounded-full bg-indigo-800 border-[0.6vmin] border-indigo-700 transition-all duration-300";
                 container.appendChild(dot);
             }
             updateStep();
@@ -254,7 +320,7 @@
                 const dots = document.getElementById('dots-container').children;
                 for (let i = 0; i < dots.length; i++) {
                     if (i <= currentStep) {
-                        dots[i].className = "w-[3vmin] h-[3vmin] rounded-full bg-yellow-400 border-[0.4vmin] border-yellow-600 shadow-[0_0_10px_#facc15] scale-125";
+                        dots[i].className = "w-[4vmin] h-[4vmin] rounded-full bg-yellow-400 border-[0.6vmin] border-yellow-600 shadow-[0_0_20px_#facc15] scale-125";
                     }
                 }
             } else {
@@ -269,11 +335,13 @@
         }
 
         function showVerdict() {
+            document.getElementById('quiz-screen').classList.remove('flex');
             document.getElementById('quiz-screen').classList.add('hidden');
             const resScreen = document.getElementById('result-screen');
             const mainCard = document.getElementById('main-card');
             
             resScreen.classList.remove('hidden');
+            resScreen.classList.add('flex');
             mainCard.classList.add('victory-bounce');
             mainCard.style.borderColor = "#facc15";
 
@@ -292,24 +360,24 @@
         }
 
         function spawnConfetti() {
-            const colors = ['#facc15', '#a78bfa', '#f472b6', '#34d399', '#ffffff'];
-            for (let i = 0; i < 50; i++) {
+            const colors = ['facc15', 'a78bfa', 'f472b6', '34d399', 'ffffff'];
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const c = document.createElement('div');
-                    c.className = 'absolute w-[1.2vmin] h-[1.2vmin] rounded-full z-50';
+                    c.className = 'absolute w-[1.8vmin] h-[1.8vmin] rounded-full z-50';
                     c.style.left = Math.random() * 100 + 'vw';
                     c.style.top = '-5vh';
-                    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    c.style.transition = `all ${Math.random() * 2 + 1.5}s linear`;
+                    c.style.backgroundColor = "#" + colors[Math.floor(Math.random() * colors.length)];
+                    c.style.transition = `all ${Math.random() * 2 + 1.8}s linear`;
                     document.body.appendChild(c);
                     
                     setTimeout(() => {
                         c.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
                         c.style.opacity = '0';
-                    }, 10);
+                    }, 15);
                     
                     setTimeout(() => c.remove(), 4000);
-                }, i * 20);
+                }, i * 25);
             }
         }
 
@@ -319,6 +387,7 @@
             const mainCard = document.getElementById('main-card');
             mainCard.classList.remove('victory-bounce');
             mainCard.style.borderColor = "rgba(250, 204, 21, 0.3)";
+            document.getElementById('result-screen').classList.remove('flex');
             document.getElementById('result-screen').classList.add('hidden');
             document.getElementById('intro-screen').classList.remove('hidden');
         }
@@ -328,11 +397,10 @@
             const title = document.querySelector('.title-wave');
             const spans = title.querySelectorAll('span');
             spans.forEach((span, i) => {
-                span.style.animationDelay = (i * 0.08) + 's';
+                span.style.animationDelay = (i * 0.08) + "s";
             });
         };
     </script>
 </body>
 </html>
-
 
