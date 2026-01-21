@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Find Your Destiny</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        
+        body {
+            font-family: 'Fredoka One', cursive;
+            background-color: #1e1b4b;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .bubble-btn {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 0.4rem 0 rgba(0,0,0,0.3);
+        }
+
+        .bubble-btn:active {
+            transform: translateY(0.2rem);
+            box-shadow: 0 0.2rem 0 rgba(0,0,0,0.3);
+        }
+
+        .crystal-ball-glow {
+            filter: drop-shadow(0 0 15px #a78bfa);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { filter: drop-shadow(0 0 10px #a78bfa); transform: scale(1); }
+            to { filter: drop-shadow(0 0 30px #c084fc); transform: scale(1.05); }
+        }
+
+        .float {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-0.8rem); }
+        }
+
+        .victory-bounce {
+            animation: vicBounce 0.6s cubic-bezier(0.36, 0, 0.66, -0.56) alternate;
+        }
+
+        @keyframes vicBounce {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .rainbow-text {
+            animation: rainbow 3s linear infinite;
+            text-shadow: 
+                -2px -2px 0 #000,  
+                 2px -2px 0 #000,
+                -2px  2px 0 #000,
+                 2px  2px 0 #000;
+        }
+
+        @keyframes rainbow {
+            0% { color: #facc15; }
+            50% { color: #fde047; }
+            100% { color: #facc15; }
+        }
+
+        .title-wave span {
+            display: inline-block;
+            animation: wave 1.5s infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-0.2rem); color: #fef08a; }
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Landscape/Small Screen Fixes: No Scrolling Allowed */
+        @media (max-height: 550px) {
+            .game-title { font-size: 6.5vh !important; line-height: 0.8 !important; margin-bottom: 1vh !important; }
+            .char-box { height: 12vh !important; margin-bottom: 1vh !important; }
+            .crystal-ball { font-size: 15vh !important; }
+            .sub-text { font-size: 3vh !important; margin-bottom: 2vh !important; }
+            .main-btn { padding: 1.5vh 6vh !important; font-size: 4vh !important; }
+            .quiz-btn { padding: 2vh !important; font-size: 5vh !important; }
+            .question-box { font-size: 5.5vh !important; min-height: 8vh !important; margin-bottom: 2vh !important; }
+            .dots-wrap { margin-bottom: 2vh !important; }
+            .verdict-header { font-size: 4vh !important; }
+            .verdict-emoji { font-size: 18vh !important; margin-bottom: 1vh !important; }
+            .verdict-name-text { font-size: 7vh !important; margin-bottom: 1vh !important; }
+            .verdict-msg-text { font-size: 4vh !important; margin-bottom: 3vh !important; }
+            #main-card { padding: 3vh 4vh !important; border-width: 1vh !important; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center bg-indigo-950">
+
+    <div id="star-field" class="absolute inset-0 overflow-hidden"></div>
+
+    <div id="main-card" class="bg-indigo-900 rounded-[8vmin] p-[5vmin] shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border-[1.5vmin] border-yellow-400/30 relative overflow-hidden transition-all duration-500 max-h-[98vh] flex flex-col items-center justify-center m-2">
+        
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="text-center w-full flex flex-col items-center justify-center">
+            <h1 class="game-title title-wave text-[9vmin] text-yellow-400 mb-[3vmin] uppercase leading-[0.85] tracking-tighter">
+                <div class="block"><span>F</span><span>I</span><span>N</span><span>D</span></div>
+                <div class="block"><span>Y</span><span>O</span><span>U</span><span>R</span></div>
+                <div class="block"><span>D</span><span>E</span><span>S</span><span>T</span><span>I</span><span>N</span><span>Y</span></div>
+            </h1>
+            
+            <div class="char-box flex justify-center items-center mb-[4vmin] h-[16vmin] relative">
+                <div class="crystal-ball text-[18vmin] crystal-ball-glow">🔮</div>
+                <div class="absolute text-[8vmin] -top-2 -left-8 float" style="animation-delay: 0.2s">✨</div>
+                <div class="absolute text-[8vmin] -bottom-2 -right-8 float" style="animation-delay: 0.5s">🌙</div>
+            </div>
+
+            <p class="sub-text text-yellow-200 text-[4vmin] mb-[4vmin] italic opacity-80">The Magic Orbs Await...</p>
+
+            <button onclick="startGame()" class="main-btn bubble-btn bg-purple-500 hover:bg-purple-400 text-white text-[5.5vmin] py-[2.5vmin] px-[10vmin] rounded-full border-b-[1vmin] border-purple-800 animate-pulse w-full sm:w-auto">
+                REVEAL! 🪄
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden flex flex-col items-center w-full justify-center">
+            <div id="dots-container" class="dots-wrap flex justify-center gap-[2vmin] mb-[4vmin]"></div>
+            <h2 id="question-text" class="question-box text-[6vmin] text-yellow-100 mb-[5vmin] min-h-[12vh] flex items-center justify-center italic px-[2vmin] text-center leading-tight">
+                Ready?
+            </h2>
+            <div class="flex flex-col gap-[2.5vmin] w-full max-w-md">
+                <button onclick="handleAnswer(true)" class="quiz-btn bubble-btn bg-emerald-500 hover:bg-emerald-400 text-white text-[7.5vmin] py-[3.5vmin] rounded-[5vmin] border-b-[1vmin] border-emerald-800 w-full">
+                    YES! 🌟
+                </button>
+                <button onclick="handleAnswer(false)" class="quiz-btn bubble-btn bg-rose-500 hover:bg-rose-400 text-white text-[7.5vmin] py-[3.5vmin] rounded-[5vmin] border-b-[1vmin] border-rose-800 w-full">
+                    NO ☁️
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden text-center flex flex-col items-center w-full justify-center">
+            <h3 class="verdict-header text-[8vmin] text-yellow-300 mb-[1vmin] animate-bounce tracking-wide">YAY! 🎉</h3>
+            <h2 class="text-[5.5vmin] text-purple-200 mb-[2vmin] uppercase tracking-wider">Your destiny is...</h2>
+            
+            <div id="verdict-emoji" class="verdict-emoji text-[20vmin] mb-[2vmin] float drop-shadow-2xl">🏆</div>
+            
+            <p id="verdict-name" class="verdict-name-text text-[11vmin] rainbow-text mb-[2vmin] font-black leading-tight uppercase tracking-widest px-[2vmin]"></p>
+            
+            <p id="verdict-msg" class="verdict-msg-text text-white text-[5.5vmin] mb-[5vmin] font-bold leading-snug px-[4vmin] drop-shadow-lg tracking-wide"></p>
+            
+            <button onclick="resetGame()" class="bubble-btn bg-indigo-500 hover:bg-indigo-400 text-white text-[5.5vmin] py-[3vmin] px-[10vmin] rounded-full border-b-[1.2vmin] border-indigo-800 w-full sm:w-auto">
+                Seek Again 🔄
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // THE DATA BANK - All elements stored here for deterministic play
+        const gameData = {
+            questions: [
+                "Do you see magic in the stars tonight?",
+                "Would you like to have a pet dragon friend?",
+                "Do you love exploring secret hidden paths?",
+                "Can you hear the music of the forest?",
+                "Do you believe you can fly to the moon?",
+                "Would you wear a crown of golden light?",
+                "Do you love the smell of cocoa potions?",
+                "Do you want to visit a castle in the clouds?",
+                "Do you like splashing in enchanted puddles?",
+                "Can you draw a map to a hidden island?",
+                "Do you want to speak the language of owls?",
+                "Do you love the colors of a winter sunset?",
+                "Would you sail a ship across a sea of stars?",
+                "Do you find treasure in shiny pebbles?",
+                "Do you want to ride a unicorn through a rainbow?"
+            ],
+            verdicts: {
+                super: [
+                    { name: "Grand Sorcerer of Joy!", emoji: "🧙‍♂️", msg: "You are a total sunshine superhero! Your big smile makes the whole world dance with magic!" },
+                    { name: "Star-Touched Hero!", emoji: "💫", msg: "Wow! You are absolutely glowing like a shooting star! Go out there and light up the universe!" },
+                    { name: "Master of All Realms!", emoji: "🌌", msg: "Amazing! Every kingdom is cheering for YOU! You are the champion of everything fun!" }
+                ],
+                middle: [
+                    { name: "Magic Potion Maker!", emoji: "🧪", msg: "Hooray! You have the perfect mix of kindness and fun! Your ideas are like sparkling magic bubbles!" },
+                    { name: "Forest Spirit Guide!", emoji: "🍃", msg: "You are so special! The trees and animals all want to be your friend because you have a heart of gold!" },
+                    { name: "Moonlight Dreamer!", emoji: "🌙", msg: "Wonderful! You have the coolest imagination ever! Your dreams are like beautiful stories that come to life!" }
+                ],
+                quiet: [
+                    { name: "Keeper of Secret Myths!", emoji: "📜", msg: "Super cool! You are the guardian of the best secrets! You are smart, brave, and totally awesome!" },
+                    { name: "Gentle Spirit Seeker!", emoji: "🎐", msg: "You are so sweet! Your peaceful heart is like a warm hug for the world. You are truly one of a kind!" },
+                    { name: "Wise Crystal Guardian!", emoji: "💎", msg: "Fantastic! You are as strong and shiny as a diamond! You have a powerful brain and a super kind soul!" }
+                ]
+            }
+        };
+
+        let currentStep = 0;
+        let yesCount = 0;
+        let sessionQuestions = [];
+
+        function createStarField() {
+            const field = document.getElementById('star-field');
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement('div');
+                star.className = 'sparkle';
+                const size = Math.random() * 3 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                field.appendChild(star);
+            }
+        }
+
+        function startGame() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            sessionQuestions = [...gameData.questions].sort(() => Math.random() - 0.5).slice(0, 5);
+            const container = document.getElementById('dots-container');
+            container.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const dot = document.createElement('div');
+                dot.className = "w-[3vmin] h-[3vmin] rounded-full bg-indigo-800 border-[0.4vmin] border-indigo-700 transition-all duration-300";
+                container.appendChild(dot);
+            }
+            updateStep();
+        }
+
+        function updateStep() {
+            if (currentStep < 5) {
+                document.getElementById('question-text').innerText = sessionQuestions[currentStep];
+                const dots = document.getElementById('dots-container').children;
+                for (let i = 0; i < dots.length; i++) {
+                    if (i <= currentStep) {
+                        dots[i].className = "w-[3vmin] h-[3vmin] rounded-full bg-yellow-400 border-[0.4vmin] border-yellow-600 shadow-[0_0_10px_#facc15] scale-125";
+                    }
+                }
+            } else {
+                showVerdict();
+            }
+        }
+
+        function handleAnswer(isYes) {
+            if (isYes) yesCount++;
+            currentStep++;
+            updateStep();
+        }
+
+        function showVerdict() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            const resScreen = document.getElementById('result-screen');
+            const mainCard = document.getElementById('main-card');
+            
+            resScreen.classList.remove('hidden');
+            mainCard.classList.add('victory-bounce');
+            mainCard.style.borderColor = "#facc15";
+
+            let pool;
+            if (yesCount >= 4) pool = gameData.verdicts.super;
+            else if (yesCount >= 2) pool = gameData.verdicts.middle;
+            else pool = gameData.verdicts.quiet;
+
+            const final = pool[Math.floor(Math.random() * pool.length)];
+            
+            document.getElementById('verdict-emoji').innerText = final.emoji;
+            document.getElementById('verdict-name').innerText = final.name;
+            document.getElementById('verdict-msg').innerText = final.msg;
+            
+            spawnConfetti();
+        }
+
+        function spawnConfetti() {
+            const colors = ['#facc15', '#a78bfa', '#f472b6', '#34d399', '#ffffff'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const c = document.createElement('div');
+                    c.className = 'absolute w-[1.2vmin] h-[1.2vmin] rounded-full z-50';
+                    c.style.left = Math.random() * 100 + 'vw';
+                    c.style.top = '-5vh';
+                    c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    c.style.transition = `all ${Math.random() * 2 + 1.5}s linear`;
+                    document.body.appendChild(c);
+                    
+                    setTimeout(() => {
+                        c.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`;
+                        c.style.opacity = '0';
+                    }, 10);
+                    
+                    setTimeout(() => c.remove(), 4000);
+                }, i * 20);
+            }
+        }
+
+        function resetGame() {
+            currentStep = 0;
+            yesCount = 0;
+            const mainCard = document.getElementById('main-card');
+            mainCard.classList.remove('victory-bounce');
+            mainCard.style.borderColor = "rgba(250, 204, 21, 0.3)";
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+
+        window.onload = () => {
+            createStarField();
+            const title = document.querySelector('.title-wave');
+            const spans = title.querySelectorAll('span');
+            spans.forEach((span, i) => {
+                span.style.animationDelay = (i * 0.08) + 's';
+            });
+        };
+    </script>
+</body>
+</html>
+
+
