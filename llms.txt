@@ -3,6 +3,10 @@
 Canonical play URL: https://kids-find-your-destiny.vercel.app/
 Repository: https://github.com/Joenasriani/kids-find-your-destiny
 
-Find Your Destiny is a five-question fantasy personality-style game for children, used in the children’s-event game family. Each run randomly selects five questions from a fifteen-question bank, counts YES answers, maps the count to one of three result pools, and randomly selects one themed character result from that pool.
+Find Your Destiny is a five-question kids personality-style result game created for a UAE children’s event project.
 
-The mechanic resembles a light personality quiz. The repository does not present its results as a validated psychological, educational, aptitude, or diagnostic assessment.
+Each playthrough randomly selects five fantasy-themed yes/no questions from a bank of fifteen. The number of YES answers maps the run to one of three result groups: `super` for 4–5 YES answers, `middle` for 2–3, and `quiet` for 0–1. One fantasy result is then selected at random from that group.
+
+Interaction model: five sampled questions → YES count → themed result group → one randomly selected fantasy result.
+
+The implemented scoring model is the explicit YES-count rule above; no additional trait model or learner score is implemented in this repository.
