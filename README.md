@@ -1,39 +1,33 @@
 # Find Your Destiny
 
-Playable build: https://kids-find-your-destiny.vercel.app/
+Play: https://kids-find-your-destiny.vercel.app/
 
-Find Your Destiny is a five-question fantasy personality-style game for children, used in the same children’s-event game family as the other `kids-*` projects.
+Find Your Destiny is a five-question kids personality-style result game created for the UAE children’s event project.
 
 ## Game structure
 
-Each run:
+Each playthrough selects five imaginative yes/no questions from a larger bank of fifteen questions.
 
-1. randomly selects 5 questions from a bank of 15 fantasy-themed questions;
-2. asks the player to answer each question with **YES** or **NO**;
-3. counts the number of YES answers;
-4. assigns the run to one of three result pools;
-5. randomly selects one themed character result from that pool.
+The result is determined from the number of YES answers:
 
-The current thresholds are:
+- 4–5 YES answers → `super` result group
+- 2–3 YES answers → `middle` result group
+- 0–1 YES answers → `quiet` result group
 
-- 4–5 YES answers → `super` result pool;
-- 2–3 YES answers → `middle` result pool;
-- 0–1 YES answers → `quiet` result pool.
+The game then selects one fantasy result at random from the matching group.
 
-Each pool contains three possible fantasy results, so two runs with the same YES count can produce different result names.
+Result examples include Grand Sorcerer of Joy, Star-Touched Hero, Magic Potion Maker, Moonlight Dreamer, Keeper of Secret Myths and Wise Crystal Guardian.
 
-## Result framing
+## Interaction model
 
-The mechanic resembles a light personality quiz: five fantasy prompts lead to a themed character result through the YES-count rule above.
+**five randomly selected questions → yes/no choices → YES count → themed result group → one randomly selected fantasy result**
 
-The repository does not present those results as a validated psychological, educational, aptitude, or diagnostic assessment, and it contains no validation study connecting the result labels to measured traits, abilities, or learning outcomes.
+## Event context
 
-## Event-family context
+This game belongs to the `kids-*` set created for the same UAE children’s event project.
 
-This game was used within the same children’s-event project family as the other `kids-*` games. That event deployment sits within a broader educational-game direction, while this repository implements this single fantasy quiz/result mechanic.
+## Repository scope
 
-## Implementation
+This repository contains the standalone Find Your Destiny game. The playable implementation is contained in `index.html`.
 
-The playable artifact is contained in `index.html`. It uses client-side HTML, JavaScript and Tailwind loaded from a CDN. The repository does not implement user accounts, learner records, curriculum tracking, assessment scoring, or cross-game progression.
-
-`index.html` is preserved as the game artifact. Documentation and discovery files are kept separate so repository cleanup does not change the game’s questions, answer logic, thresholds, result pools, controls, visuals, timing, or runtime behavior.
+The game file is preserved as the playable artifact. Documentation and discovery files sit around it without changing questions, answer logic, result thresholds, result text, controls, visual behavior or runtime behavior.
