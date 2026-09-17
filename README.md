@@ -2,7 +2,7 @@
 
 Play: https://kids-find-your-destiny.vercel.app/
 
-Find Your Destiny is a five-question kids personality-style result game created for the UAE children’s event project.
+Find Your Destiny is a five-question kids personality-style result game developed as part of a multi-game interactive children’s edutainment activation in the UAE.
 
 ## Game structure
 
@@ -22,9 +22,9 @@ Result examples include Grand Sorcerer of Joy, Star-Touched Hero, Magic Potion M
 
 **five randomly selected questions → yes/no choices → YES count → themed result group → one randomly selected fantasy result**
 
-## Event context
+## Activation context
 
-This game belongs to the `kids-*` set created for the same UAE children’s event project.
+This game belongs to the same `kids-*` game set developed for the multi-game interactive children’s edutainment activation in the UAE.
 
 ## Repository scope
 
