@@ -2,32 +2,34 @@
 
 Play: https://kids-find-your-destiny.vercel.app/
 
-Find Your Destiny is a five-question kids personality-style result game developed as part of a multi-game interactive children’s edutainment activation in the UAE.
+Find Your Destiny is a five-question fantasy result game.
 
-## Game structure
+## How it plays
 
-Each playthrough selects five imaginative yes/no questions from a larger bank of fifteen questions.
+Each playthrough selects five imaginative yes/no questions from a bank of fifteen.
 
-The result is determined from the number of YES answers:
+The number of YES answers selects one of three result groups:
 
-- 4–5 YES answers → `super` result group
-- 2–3 YES answers → `middle` result group
-- 0–1 YES answers → `quiet` result group
+- 4–5 YES → `super`
+- 2–3 YES → `middle`
+- 0–1 YES → `quiet`
 
-The game then selects one fantasy result at random from the matching group.
+The game then selects one fantasy result at random from that group.
 
-Result examples include Grand Sorcerer of Joy, Star-Touched Hero, Magic Potion Maker, Moonlight Dreamer, Keeper of Secret Myths and Wise Crystal Guardian.
+Example outcomes include Grand Sorcerer of Joy, Star-Touched Hero, Magic Potion Maker, Moonlight Dreamer, Keeper of Secret Myths and Wise Crystal Guardian.
 
-## Interaction model
+**five random questions → yes/no choices → YES count → result group → random fantasy result**
 
-**five randomly selected questions → yes/no choices → YES count → themed result group → one randomly selected fantasy result**
+## Content note
 
-## Activation context
+The fantasy outcomes are game results, not a validated personality or psychological assessment.
 
-This game belongs to the same `kids-*` game set developed for the multi-game interactive children’s edutainment activation in the UAE.
+## Implementation
 
-## Repository scope
+The standalone playable game is contained in `index.html`.
 
-This repository contains the standalone Find Your Destiny game. The playable implementation is contained in `index.html`.
+## Event activation
 
-The game file is preserved as the playable artifact. Documentation and discovery files sit around it without changing questions, answer logic, result thresholds, result text, controls, visual behavior or runtime behavior.
+This game was developed as one module in a multi-game interactive children’s edutainment activation in the UAE.
+
+Event production: [Peach Society](https://peach-society.com/) — Dubai-based event and experiential production company.
